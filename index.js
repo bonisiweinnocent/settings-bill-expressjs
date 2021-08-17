@@ -81,12 +81,14 @@ app.get('/actions', function(req, res){
 
 
 app.get('/actions/:type', function(req, res){
-    const actions =settingsBill.actions()
+const type= req.params.type
+    const actions =settingsBill.actionsFor(type)
+    
     actions.forEach(elem => {
-        elem.timestamp = moment(elem.timestamps).fromNow()})
-        const type= req.params.type
-   
-    res.render('actions', {actions:settingsBill.actionsFor(type)});
+        elem.currentTime = moment(elem.timestamp).fromNow()})
+       
+        res.render('actions',{actions:actions});
+
 
 
 })
