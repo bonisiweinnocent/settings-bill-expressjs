@@ -11,7 +11,7 @@ describe('settings-bill', function(){
         assert.equal(1, settingsBill.actionsFor('call').length);
     });
 
-    it('should be able to set the settings', function(){
+    it('should be able to configure the settings', function(){
         settingsBill.setSettings({
             smsCost: 2.35,
             callCost: 3.35,
