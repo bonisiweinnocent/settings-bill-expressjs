@@ -66,20 +66,24 @@ app.post('/action' ,function(req, res){
     res.redirect('/');
 
 });
-app.get('/actions', function(req, res){
-    res.render('actions', {actions:settingsBill.actions()});
+// app.get('/actions', function(req, res){
+//     res.render('actions', {actions:settingsBill.actions()});
      
 
-})
-
+// });
 app.get('/actions', function(req, res){
+    var actionsMade = settingsBill.actions()
+    actionsMade.forEach((element)=>{
+        element.currentTime = moment(element.timestamp).fromNow()
+    });
+    res.render('actions',{actions:actionsMade});
+});
+
+
+app.get('/actions/:type', function(req, res){
     const actions =settingsBill.actions()
     actions.forEach(elem => {
         elem.timestamp = moment(elem.timestamps).fromNow()})
-})
-
-app.get('/actions/:type', function(req, res){
-   
         const type= req.params.type
    
     res.render('actions', {actions:settingsBill.actionsFor(type)});
